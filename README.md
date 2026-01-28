@@ -14,9 +14,9 @@ Key Specifications:
 # Prerequisites
 Ensure the following are installed before deployment:
 
-1. Stable Diffusion WebUI
+1. [Stable Diffusion WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
 
-2. ControlNet Extension for WebUI
+2. [ControlNet Extension for WebUI](https://github.com/Mikubill/sd-webui-controlnet)
 
   - Clone the extension to the stable-diffusion-webui/extensions/ directory.
 

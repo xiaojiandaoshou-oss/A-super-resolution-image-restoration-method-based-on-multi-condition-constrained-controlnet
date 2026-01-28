@@ -11,7 +11,7 @@ Key Specifications:
 - Input: Low-resolution image (256×256) + Sketch (256×256) (combined as 6-channel input)
 
 - Output: High-resolution image (512×512)
-Prerequisites
+# Prerequisites
 Ensure the following are installed before deployment:
 
 1. Stable Diffusion WebUI
@@ -27,9 +27,9 @@ Ensure the following are installed before deployment:
 
   - Configuration file: controlnet_sketch_guided_sr_webui.yaml (must have the same name as the weight file)
 
-Deployment Steps
+# Deployment Steps
 
-Step 1: Place Model Files
+# Step 1: Place Model Files
 
 Copy the trained model weight and configuration file to the ControlNet model directory of WebUI:
 
@@ -42,7 +42,7 @@ stable-diffusion-webui/
 
 Critical Note: The model weight and YAML file must have identical filenames (including extensions) to ensure proper loading.
 
-Step 2: Configure YAML File
+# Step 2: Configure YAML File
 
 Ensure the YAML file contains the following content (adapts to 6-channel dual-condition input):
 
@@ -57,7 +57,7 @@ encoder_hidden_size: 768
 down_block_types: ["DownBlock2D", "CrossAttnDownBlock2D", "CrossAttnDownBlock2D", "CrossAttnDownBlock2D"]
 up_block_types: ["CrossAttnUpBlock2D", "CrossAttnUpBlock2D", "CrossAttnUpBlock2D", "UpBlock2D"]
 
-Step 3: Restart Stable Diffusion WebUI
+# Step 3: Restart Stable Diffusion WebUI
 
 Close any running WebUI instances and restart to load the new model. Use the following command to enable xFormers for acceleration:
 
@@ -67,7 +67,7 @@ webui-user.bat --xformers
 # Linux/Mac
 ./webui.sh --xformers
 
-Step 4: Verify Model Loading
+# Step 4: Verify Model Loading
 
 1. Open Stable Diffusion WebUI in your browser (default: http://localhost:7860).
 
@@ -77,17 +77,17 @@ Step 4: Verify Model Loading
 
 4. If the model appears in the dropdown, deployment is successful.
 
-Inference Guide (WebUI Operation)
+# Inference Guide (WebUI Operation)
 
 Follow these steps to generate high-resolution images using the deployed model:
 
-Step 1: Prepare Input Images
+# Step 1: Prepare Input Images
 
 - Low-resolution image: 256×256 (content to be upscaled)
 
 - Sketch image: 256×256 (matches the structure of the low-res image)
 
-Step 2: Combine Dual-Condition Images
+# Step 2: Combine Dual-Condition Images
 
 ControlNet only accepts a single input image. Combine the low-res image and sketch into one 256×256 image (WebUI built-in tool):
 
@@ -97,7 +97,7 @@ ControlNet only accepts a single input image. Combine the low-res image and sket
 
 3. Resize the combined image to 256×256 (use WebUI’s upscale function) → Save as combined_cond.png.
 
-Step 3: Configure ControlNet Parameters
+# Step 3: Configure ControlNet Parameters
 
 In the ControlNet tab, set the following parameters:
 
@@ -119,7 +119,7 @@ In the ControlNet tab, set the following parameters:
 
 - Ending Control Step: 0.8–1.0 (reduce to 0.8 for softer details).
 
-Step 4: Configure SD Generation Parameters
+# Step 4: Configure SD Generation Parameters
 
 Set the following in the main WebUI interface for optimal results:
 
@@ -137,11 +137,11 @@ Set the following in the main WebUI interface for optimal results:
 
 - Negative Prompt: blurry, low resolution, ugly, distorted, pixelated.
 
-Step 5: Generate High-Resolution Image
+# Step 5: Generate High-Resolution Image
 
 Click the Generate button. The output will be a 512×512 high-resolution image that preserves the content of the low-res input and the structure of the sketch.
 
-Troubleshooting
+# Troubleshooting
 
 1. Model Not Found in WebUI
 
@@ -173,7 +173,7 @@ Troubleshooting
 
 - Reduce batch size (set to 1 in WebUI settings if needed).
 
-Notes
+# Notes
 
 - The model’s performance depends on the training dataset. For best results, use inputs consistent with the training data’s style.
 

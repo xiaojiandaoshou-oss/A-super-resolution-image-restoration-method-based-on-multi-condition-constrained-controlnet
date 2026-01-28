@@ -1,2 +1,3 @@
 # A-super-resolution-image-restoration-method-based-on-multi-condition-constrained-controlnet
 A ControlNet training scheme that utilizes dual-condition input (low-resolution original image + corresponding line drawing or semantic segmentation image) to guide SD in generating high-resolution original images
+The core task of this scheme is to enable ControlNet to learn the mapping relationship from "low-resolution original image + line drawing or semantic segmentation map" to "high-resolution original image", while maintaining the characteristics of compatibility with SD1.5+WebUI, lightweight training (LoRA), and memory-friendly performance. Training can be conducted with a graphics card memory of ≥12G.

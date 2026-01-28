@@ -45,7 +45,7 @@ Critical Note: The model weight and YAML file must have identical filenames (inc
 # Step 2: Configure YAML File
 
 Ensure the YAML file contains the following content (adapts to 6-channel dual-condition input):
-
+```
 model_type: controlnet
 base_model: sd15
 controlnet_version: 1.1
@@ -56,17 +56,17 @@ preprocessor: none
 encoder_hidden_size: 768
 down_block_types: ["DownBlock2D", "CrossAttnDownBlock2D", "CrossAttnDownBlock2D", "CrossAttnDownBlock2D"]
 up_block_types: ["CrossAttnUpBlock2D", "CrossAttnUpBlock2D", "CrossAttnUpBlock2D", "UpBlock2D"]
-
+```
 # Step 3: Restart Stable Diffusion WebUI
 
 Close any running WebUI instances and restart to load the new model. Use the following command to enable xFormers for acceleration:
-
+```
 # Windows
 webui-user.bat --xformers
 
 # Linux/Mac
 ./webui.sh --xformers
-
+```
 # Step 4: Verify Model Loading
 
 1. Open Stable Diffusion WebUI in your browser (default: http://localhost:7860).

@@ -32,14 +32,14 @@ Ensure the following are installed before deployment:
 # Step 1: Place Model Files
 
 Copy the trained model weight and configuration file to the ControlNet model directory of WebUI:
-
+```
 stable-diffusion-webui/
 ├─ extensions/
 │  └─ sd-webui-controlnet/
 │     └─ models/  # Paste both files here
 │        ├─ controlnet_sketch_guided_sr_webui.pth
 │        └─ controlnet_sketch_guided_sr_webui.yaml
-
+```
 Critical Note: The model weight and YAML file must have identical filenames (including extensions) to ensure proper loading.
 
 # Step 2: Configure YAML File

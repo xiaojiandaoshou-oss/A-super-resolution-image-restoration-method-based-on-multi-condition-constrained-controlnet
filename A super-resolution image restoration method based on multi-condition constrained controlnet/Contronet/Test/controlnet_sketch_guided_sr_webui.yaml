@@ -1,0 +1,10 @@
+model_type: controlnet
+base_model: sd15
+controlnet_version: 1.1
+input_channels: 6  # 3(低分辨率图)+3(分割图)，核心配置
+input_size: [256, 256]
+target_size: [512, 512]
+preprocessor: none
+encoder_hidden_size: 768
+down_block_types: ["DownBlock2D", "CrossAttnDownBlock2D", "CrossAttnDownBlock2D", "CrossAttnDownBlock2D"]
+up_block_types: ["CrossAttnUpBlock2D", "CrossAttnUpBlock2D", "CrossAttnUpBlock2D", "UpBlock2D"]

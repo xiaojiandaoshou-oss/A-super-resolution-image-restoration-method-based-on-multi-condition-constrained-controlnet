@@ -1,0 +1,10 @@
+model_type: controlnet
+base_model: sd15
+controlnet_version: 1.1
+input_channels: 6  # 关键：标记输入通道为6，适配双条件拼接
+input_size: [256, 256]  # 双条件图输入尺寸
+target_size: [512, 512] # 目标图输出尺寸
+preprocessor: none      # 双条件为手动输入，无需内置预处理器
+encoder_hidden_size: 768
+down_block_types: ["DownBlock2D", "CrossAttnDownBlock2D", "CrossAttnDownBlock2D", "CrossAttnDownBlock2D"]
+up_block_types: ["CrossAttnUpBlock2D", "CrossAttnUpBlock2D", "CrossAttnUpBlock2D", "UpBlock2D"]

@@ -139,6 +139,7 @@ python train_controlnet_sketch_guided_sr.py
 python -m torch.distributed.run --nproc_per_node=1 train_controlnet_sketch_guided_sr.py
 ```
 Key Training Process Notes
+
  1.First run: The code will automatically download the SD1.5 base model (≈4GB) from Hugging Face, it is recommended to use a proxy for acceleration; the model will be cached locally after the first download, and no repeated download is required for subsequent training.
  
  2.Loss change: The training loss will gradually decrease and stabilize (normal range: from ~1.0 to <0.1). If the loss rises continuously, check the dataset filename pairing and image size.
@@ -155,7 +156,7 @@ tensorboard --logdir=tensorboard_logs
  ·WebUI compatible final model: controlnet_sketch_guided_sr_webui.pth (automatically exported after 
  training completion, for direct deployment)
 
-5. Training Result Verification
+Training Result Verification
 After training, check the trained_model directory for the WebUI compatible model file controlnet_sketch_guided_sr_webui.pth—this file is the final training result and will be used for subsequent WebUI deployment.
 
 Note: If the training is stopped early (not completed), select the model file with the smallest loss (e.g., controlnet_step_1000.pth) and rename it to controlnet_sketch_guided_sr_webui.pth for deployment.

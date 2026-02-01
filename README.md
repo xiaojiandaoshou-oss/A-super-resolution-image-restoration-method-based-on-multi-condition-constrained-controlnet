@@ -1,6 +1,6 @@
-#ControlNet Sketch-Guided Super-Resolution Deployment Guide
+# ControlNet Sketch-Guided Super-Resolution Deployment Guide
 
-#Overview
+# Overview
 
 This guide details the deployment process of a dual-condition ControlNet model (trained for sketch-guided image and segmentation map super-resolution) to Stable Diffusion WebUI. The model takes a low-resolution image and a corresponding sketch as inputs, then generates a high-resolution image while preserving content and structure.
 
@@ -14,7 +14,7 @@ Key Specifications:
 
 - Output: High-resolution image (512×512)
 
-#Prerequisites
+# Prerequisites
 
 Ensure the following are installed before deployment:
 
@@ -28,9 +28,9 @@ Ensure the following are installed before deployment:
 
 4. Configuration file: controlnet_sketch_guided_sr_webui.yaml (must have the same name as the weight file)
 
-#Deployment Steps
+# Deployment Steps
 
-#Step 1: Place Model Files
+# Step 1: Place Model Files
 
 Copy the trained model weight and configuration file to the ControlNet model directory of WebUI:
 ```
@@ -43,7 +43,7 @@ stable-diffusion-webui/
 ```
 Critical Note: The model weight and YAML file must have identical filenames (including extensions) to ensure proper loading.
 
-#Step 2: Configure YAML File
+# Step 2: Configure YAML File
 
 Ensure the YAML file contains the following content (adapts to 6-channel dual-condition input):
 ```
@@ -83,13 +83,13 @@ webui-user.bat --xformers
 
 Follow these steps to generate high-resolution images using the deployed model:
 
-#Step 1: Prepare Input Images
+# Step 1: Prepare Input Images
 
 - Low-resolution image: 256×256 (content to be upscaled)
 
 - Sketch image: 256×256 (matches the structure of the low-res image)
 
-#Step 2: Combine Dual-Condition Images
+# Step 2: Combine Dual-Condition Images
 
 ControlNet only accepts a single input image. Combine the low-res image and sketch into one 256×256 image (WebUI built-in tool):
 
@@ -99,7 +99,7 @@ ControlNet only accepts a single input image. Combine the low-res image and sket
 
 3. Resize the combined image to 256×256 (use WebUI’s upscale function) → Save as combined_cond.png.
 
-#Step 3: Configure ControlNet Parameters
+# Step 3: Configure ControlNet Parameters
 
 In the ControlNet tab, set the following parameters:
 
@@ -121,7 +121,7 @@ In the ControlNet tab, set the following parameters:
 
 - Ending Control Step: 0.8–1.0 (reduce to 0.8 for softer details).
 
-#Step 4: Configure SD Generation Parameters
+# Step 4: Configure SD Generation Parameters
 
 Set the following in the main WebUI interface for optimal results:
 
@@ -139,13 +139,13 @@ Set the following in the main WebUI interface for optimal results:
 
 - Negative Prompt: blurry, low resolution, ugly, distorted, pixelated.
 
-#Step 5: Generate High-Resolution Image
+# Step 5: Generate High-Resolution Image
 
 Click the Generate button. The output will be a 512×512 high-resolution image that preserves the content of the low-res input and the structure of the sketch.
 
-#Troubleshooting
+# Troubleshooting
 
-#1. Model Not Found in WebUI
+# 1. Model Not Found in WebUI
 
 - Ensure the model weight and YAML file have identical filenames.
 
@@ -153,7 +153,7 @@ Click the Generate button. The output will be a 512×512 high-resolution image t
 
 - Restart WebUI to reload the model.
 
-#2. Blurry/ Distorted Output
+# 2. Blurry/ Distorted Output
 
 - Verify the base model is Stable Diffusion v1.5.
 
@@ -163,19 +163,19 @@ Click the Generate button. The output will be a 512×512 high-resolution image t
 
 - Adjust CFG Scale to 6–8.
 
-#3. Overly Rigid (Sketch-Like) Output
+# 3. Overly Rigid (Sketch-Like) Output
 
 - Reduce Control Weight to 0.7–0.8.
 
 - Lower Ending Control Step to 0.8 (let SD optimize details in final steps).
 
-#4. Out-of-Memory Errors
+# 4. Out-of-Memory Errors
 
 - Enable xFormers (add --xformers to the WebUI launch command).
 
 - Reduce batch size (set to 1 in WebUI settings if needed).
 
-#Notes
+# Notes
 
 - The model’s performance depends on the training dataset. For best results, use inputs consistent with the training data’s style.
 
@@ -183,5 +183,3 @@ Click the Generate button. The output will be a 512×512 high-resolution image t
 
 - For faster inference, use GPUs with ≥12GB VRAM (e.g., RTX 3060/4060 or higher).
 
-
-- For faster inference, use GPUs with ≥12GB VRAM (e.g., RTX 3060/4060 or higher).

@@ -61,11 +61,16 @@ your-project/
 └─ train_controlnet_sketch_guided_sr.py  # Training script
 ```
 Dataset Production Requirements
+
 1.Size Consistency: Low-res images and sketches must be 256×256, high-res target images must be 512×512 (consistent with model input/output settings)
+
 2.Filename Consistency: The three files corresponding to the same sample must have the same name and suffix (e.g., 001.png in all three folders)
+
 3.Format Compatibility: Support PNG/JPG/JPEG; single-channel gray sketches are automatically converted to 3-channel RGB by the code
+
 4.Dataset Scale: ≥1000 samples (avoid overfitting); unified style (e.g., only anime/only real scenes) is recommended
 Quick Dataset Generation (Batch Resize)
+
 If you only have high-resolution original images, use the following code to batch generate low-resolution images and resize sketches/high-res images to the specified size:
 python
 ```
@@ -135,16 +140,21 @@ python -m torch.distributed.run --nproc_per_node=1 train_controlnet_sketch_guide
 ```
 Key Training Process Notes
  1.First run: The code will automatically download the SD1.5 base model (≈4GB) from Hugging Face, it is recommended to use a proxy for acceleration; the model will be cached locally after the first download, and no repeated download is required for subsequent training.
+ 
  2.Loss change: The training loss will gradually decrease and stabilize (normal range: from ~1.0 to <0.1). If the loss rises continuously, check the dataset filename pairing and image size.
+ 
  3.Log monitoring: Use TensorBoard to view real-time loss and learning rate changes (run the command below and access http://localhost:6006 in the browser):
 ```
 tensorboard --logdir=tensorboard_logs
 ```
+4.Breakpoint resume training: If the training is interrupted due to GPU downtime/power failure, re-run the training command directly—the code will automatically load the latest saved model and continue training.
+
 5. epoch in the trained_model directory, including:
 · LoRA weights (if USE_LORA=True): lora_step_xxx/ folder
 · Full model weights: controlnet_step_xxx.pth / controlnet_epoch_xxx.pth
  ·WebUI compatible final model: controlnet_sketch_guided_sr_webui.pth (automatically exported after 
  training completion, for direct deployment)
+
 5. Training Result Verification
 After training, check the trained_model directory for the WebUI compatible model file controlnet_sketch_guided_sr_webui.pth—this file is the final training result and will be used for subsequent WebUI deployment.
 
